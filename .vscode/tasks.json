@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "dotnet",
+			"task": "watch Assembly-CSharp",
+			"file": "C:\\Users\\DUCOgen_DELL3070Ti#2\\Encounter\\Assembly-CSharp.csproj",
+			"problemMatcher": [],
+			"label": "dotnet: watch Assembly-CSharp",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

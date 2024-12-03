@@ -1,0 +1,2 @@
+C:\Users\DUCOgen_DELL3070Ti#2\Encounter\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\DUCOgen_DELL3070Ti#2\Encounter\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
