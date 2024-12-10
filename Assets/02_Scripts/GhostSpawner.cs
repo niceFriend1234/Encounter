@@ -5,38 +5,54 @@ using Meta.XR.MRUtilityKit;
 
 public class GhostSpawner : MonoBehaviour
 {
-//     public float SpawnTimer = 1f;
-//     public GameObject prefabToSpawner;
+    public float SpawnTimer = 1f;
+    public GameObject prefabToSpawner;
 
-//     public float minEdgeDistace = 0.3f;
-//     public MRUKAnchor.SceneLabels spawnLabels;
-//     public float normalOffset;
+    public float minEdgeDistace = 0.3f;
+    public MRUKAnchor.SceneLabels spawnLabels;
+    public float normalOffset;
 
-//     private float timer;
-//     void Start()
-//     {
-        
-//     }
+    public int spawnTry = 1000;
 
-//     void Update()
-//     {
-// if(!MRUK.Instance && !MRUK.Instance.IsInitialized) return;
+    private float timer;
+    void Start()
+    {
 
-//         timer += Time.deltaTime;
-//         if(timer >= SpawnTimer)
-// {
-//     SpawnGhost();
-//     timer -= SpawnTimer;
-// }   
-//  }
+    }
 
-// public void SpawnGhost()
-// {
-// MRUKRoom room = MRUKRoom.Instance.GetCurrentRoom();
+    void Update()
+    {
+        if (!MRUK.Instance && !MRUK.Instance.IsInitialized) return;
 
-// room.GenerateRandomPositionOnSurface(MRUK.SurfaceType.VERTICAL,minEdgeDistace, LabelFilter.Included(spawnLabels), out Vector3 norm);
-//     Vector3 randomPositionNormalOffset = pos + norm * normalOffset;
-//     randomPositionNormalOffset.y = 0;
-// Instantiate(prefabToSpawner, randomPosition, Quaternion.identity);
-// }
+        timer += Time.deltaTime;
+        if (timer >= SpawnTimer)
+        {
+            SpawnGhost();
+            timer -= SpawnTimer;
+        }
+    }
+
+    public void SpawnGhost()
+    {
+        MRUKRoom room = MRUK.Instance.GetCurrentRoom();
+
+        int currentTry = 0;
+        while (currentTry < spawnTry)
+        {
+
+        bool hasFoundPosition = room.GenerateRandomPositionOnSurface(MRUK.SurfaceType.VERTICAL, minEdgeDistace, LabelFilter.Included(spawnLabels), out Vector3 pos,out Vector3 norm);
+
+        if (hasFoundPosition)
+        {
+            Vector3 randomPositionNormalOffset = pos + norm * normalOffset;
+            randomPositionNormalOffset.y = 0;
+
+            Instantiate(prefabToSpawner, randomPositionNormalOffset, Quaternion.identity);
+                return;
+        } else
+            {
+                currentTry++;
+            }
+        }
+    }
 }
